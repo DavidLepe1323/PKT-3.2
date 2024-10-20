@@ -1,0 +1,471 @@
+S1
+Switch>
+Switch>
+Switch>enable
+Switch#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname S1
+S1(config)#no ip domain-lookup
+S1(config)#enable secret class
+S1(config)#line console 0
+S1(config-line)#password cisco
+S1(config-line)#login
+S1(config-line)#exit
+S1(config)#vtp mode server
+Device mode already VTP SERVER.
+S1(config)#vtp domain access
+Changing VTP domain name from NULL to access
+S1(config)#vtp pass
+S1(config)#vtp password lab4
+Setting device VLAN database password to lab4
+S1(config)#end
+S1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S1#01:16:08 %DTP-5-DOMAINMISMATCH: Unable to perform trunk negotiation on port Fa0/2 because of VTP domain mismatch.
+
+
+S1#
+S1#ena
+S1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S1(config)#interface range fa0/1-5
+S1(config-if-range)#swi
+S1(config-if-range)#switchport mode trunk
+
+
+S1(config-if-range)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/2, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/2, changed state to up
+
+S1(config-if-range)#s
+S1(config-if-range)#swi
+S1(config-if-range)#switchport truk native vlan 199
+                                  ^
+% Invalid input detected at '^' marker.
+	
+S1(config-if-range)#
+S1(config-if-range)#switchport trunk native vlan 199
+S1(config-if-range)#
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/2 (199), with S3 FastEthernet0/2 (1).
+
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (199), with S2 FastEthernet0/1 (1).
+
+S1(config-if-range)#no sh
+S1(config-if-range)#
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (199), with S2 FastEthernet0/1 (1).
+
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/2 (199), with S3 FastEthernet0/2 (1).
+
+S1(config-if-range)#
+S1(config-if-range)#
+S1(config-if-range)#exit
+S1(config)#vlan 199
+S1(config-vlan)#name ADMON
+S1(config-vlan)#exit
+S1(config)#vlan 10
+S1(config-vlan)#name SISTEMAS
+S1(config-vlan)#exit
+S1(config)#vlan 20
+S1(config-vlan)#name LIDTS
+S1(config-vlan)#exit
+S1(config)#vlan 30
+S1(config-vlan)#name CONTADURIA
+S1(config-vlan)#name CONTADURIA
+S1(config-vlan)#exit
+S1(config)#
+S1(config)#interface vlan 199
+S1(config-if)#
+%LINK-5-CHANGED: Interface Vlan199, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan199, changed state to up
+
+S1(config-if)#ip ad
+S1(config-if)#ip address 172.17.199.11 255.255.255.0
+S1(config-if)#no sh
+S1(config-if)#
+
+
+
+
+
+
+
+
+S1 con0 is now available
+
+
+
+
+
+
+Press RETURN to get started.
+
+
+S2
+
+Switch>
+Switch>enable
+Switch#con
+Switch#conf t+
+             ^
+% Invalid input detected at '^' marker.
+	
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname S2
+S2(config)#no ip domain-lookup
+S2(config)#enable secret class
+S2(config)#line console 0
+S2(config-line)#password cisco
+S2(config-line)#login
+S2(config-line)#show vtp s
+S2(config-line)#show vtp status
+                 ^
+% Invalid input detected at '^' marker.
+	
+S2(config-line)#exit
+S2(config)#show vtp status
+            ^
+% Invalid input detected at '^' marker.
+	
+S2(config)#vtp mode client
+Setting device to VTP CLIENT mode.
+S2(config)#vtp domain access
+Changing VTP domain name from NULL to access
+S2(config)#vtp password lab4
+Setting device VLAN database password to lab4
+S2(config)#end
+S2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2#%SPANTREE-2-RECV_PVID_ERR: Received 802.1Q BPDU on non trunk FastEthernet0/1 VLAN1.
+
+%SPANTREE-2-BLOCK_PVID_LOCAL: Blocking FastEthernet0/1 on VLAN0001. Inconsistent port type.
+
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+S2#interface range fa0/1-5
+             ^
+% Invalid input detected at '^' marker.
+	
+S2#ena
+S2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (1), with S1 FastEthernet0/1 (199).
+
+S2(config)#
+S2(config)#interface range fa0/1-5
+S2(config-if-range)#s
+S2(config-if-range)#sw
+S2(config-if-range)#switchport mode trunk
+S2(config-if-range)#s
+S2(config-if-range)#swi
+S2(config-if-range)#switchport trunk native vlan 199
+S2(config-if-range)#no sh
+S2(config-if-range)#end
+S2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2#
+S2#ena
+S2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#interface fa0/6
+S2(config-if)#swi
+S2(config-if)#switchport port-se
+S2(config-if)#switchport port-security 
+Command rejected: FastEthernet0/6 is a dynamic port.
+S2(config-if)#switchport port-security ma
+S2(config-if)#switchport port-security maxi
+S2(config-if)#switchport port-security maximum 2
+S2(config-if)#swi
+S2(config-if)#switchport port-se
+S2(config-if)#switchport port-security mac-ad
+S2(config-if)#switchport port-security mac-address sticky
+S2(config-if)#interface fa0/11
+S2(config-if)#swi
+S2(config-if)#switchport port-
+S2(config-if)#switchport port-security 
+Command rejected: FastEthernet0/11 is a dynamic port.
+S2(config-if)#swi
+S2(config-if)#switchport port-se
+S2(config-if)#switchport port-security ma
+S2(config-if)#switchport port-security maximum
+S2(config-if)#switchport port-security maximum 2
+S2(config-if)#switch
+S2(config-if)#switchport port-security macc
+S2(config-if)#switchport port-security macc-add
+S2(config-if)#switchport port-security macc-address
+S2(config-if)#switchport port-security macc-address sticky
+                                          ^
+% Invalid input detected at '^' marker.
+	
+S2(config-if)#switchport port-security mac-address sticky
+S2(config-if)#interface fa0/18
+S2(config-if)#switchport port-security 
+Command rejected: FastEthernet0/18 is a dynamic port.
+S2(config-if)#switchport port-security maximum 2
+S2(config-if)#switchport port-security mac-address sticky
+S2(config-if)#end
+S2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2#sh
+S2#show vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/2, Fa0/3, Fa0/4, Fa0/5
+                                                Fa0/6, Fa0/7, Fa0/8, Fa0/9
+                                                Fa0/10, Fa0/11, Fa0/12, Fa0/13
+                                                Fa0/14, Fa0/15, Fa0/16, Fa0/17
+                                                Fa0/18, Fa0/19, Fa0/20, Fa0/21
+                                                Fa0/22, Fa0/23, Fa0/24, Gig0/1
+                                                Gig0/2
+10   SISTEMAS                         active    
+20   LIDTS                            active    
+30   CONTADURIA                       active    
+199  ADMON                            active    
+1002 fddi-default                     active    
+1003 token-ring-default               active    
+1004 fddinet-default                  active    
+1005 trnet-default                    active    
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0
+10   enet  100010     1500  -      -      -        -    -        0      0
+20   enet  100020     1500  -      -      -        -    -        0      0
+30   enet  100030     1500  -      -      -        -    -        0      0
+199  enet  100199     1500  -      -      -        -    -        0      0
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 tr    101003     1500  -      -      -        -    -        0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trnet 101005     1500  -      -      -        ibm  -        0      0   
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+S2#
+S2#
+S2#
+S2#ena
+S2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#interface vlan 199
+S2(config-if)#
+%LINK-5-CHANGED: Interface Vlan199, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan199, changed state to up
+
+S2(config-if)#ip add
+S2(config-if)#ip address 172.17.199.12 255.255.255.0
+S2(config-if)#no sh
+S2(config-if)#no shutdown 
+S2(config-if)#
+S2(config-if)#exit
+S2(config)#interface ran
+S2(config)#interface range fa0/6-fa0/10
+S2(config-if-range)#sw
+S2(config-if-range)#switchport acc
+S2(config-if-range)#switchport access vlan 30
+S2(config-if-range)#inter
+S2(config-if-range)#interface range fa0/11-fa0/17
+S2(config-if-range)#swi
+S2(config-if-range)#switchport acc
+S2(config-if-range)#switchport access vlan 10
+S2(config-if-range)#inter
+S2(config-if-range)#interface range fa0/18-fa0/24
+S2(config-if-range)#swi
+S2(config-if-range)#switchport acc
+S2(config-if-range)#switchport access vlan 20
+S2(config-if-range)#end
+S2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2#copy ru
+S2#copy running-config sta
+S2#copy running-config startup-config 
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+S3
+Switch>
+Switch>
+Switch>ena 
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname S3
+S3(config)#no ip domain-lookup
+S3(config)#enable secret class
+S3(config)#line console 0}
+                        ^
+% Invalid input detected at '^' marker.
+	
+S3(config)#line console 0
+S3(config-line)#pass
+S3(config-line)#password cisco
+S3(config-line)#login
+S3(config-line)#exit
+S3(config)#vtp mode tr
+S3(config)#vtp mode transparent 
+Setting device to VTP TRANSPARENT mode.
+S3(config)#vtp domain acc
+S3(config)#vtp domain acc
+Changing VTP domain name from NULL to acc
+S3(config)#vtp do01:16:05 %DTP-5-DOMAINMISMATCH: Unable to perform trunk negotiation on port Fa0/2 because of VTP domain mismatch.
+
+
+% Incomplete command.
+S3(config)#
+S3(config)#vtp domain access
+Changing VTP domain name from acc to access
+S3(config)#vtp pass
+S3(config)#vtp password lab4
+Setting device VLAN database password to lab4
+S3(config)#end
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3#
+S3#ena
+S3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S3(config)#
+S3(config)#%SPANTREE-2-RECV_PVID_ERR: Received 802.1Q BPDU on non trunk FastEthernet0/2 VLAN1.
+
+%SPANTREE-2-BLOCK_PVID_LOCAL: Blocking FastEthernet0/2 on VLAN0001. Inconsistent port type.
+
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/2, changed state to down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/2, changed state to up
+
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/2 (1), with S1 FastEthernet0/2 (199).
+
+S3(config)#
+S3(config)#ena
+% Incomplete command.
+S3(config)#interface range fa0/1-5
+S3(config-if-range)#swi
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/2 (1), with S1 FastEthernet0/2 (199).
+
+S3(config-if-range)#switchport mode trunk
+S3(config-if-range)#swi
+S3(config-if-range)#switchport trunk native vlan 199
+S3(config-if-range)#no sh
+S3(config-if-range)#no shutdown 
+S3(config-if-range)#end
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3#
+S3#ena
+S3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S3(config)#interface fa0/6
+S3(config-if)#swi
+S3(config-if)#switchport port-se
+Command rejected: FastEthernet0/6 is a dynamic port.
+S3(config-if)#switchport port-se
+S3(config-if)#switchport port-security 
+Command rejected: FastEthernet0/6 is a dynamic port.
+S3(config-if)#sw
+S3(config-if)#switchport port-se
+S3(config-if)#switchport port-security max
+S3(config-if)#switchport port-security maximum 2
+S3(config-if)#swi
+S3(config-if)#switchport port-se
+S3(config-if)#switchport port-security mac-add
+S3(config-if)#switchport port-security mac-address stiky
+                                                      ^
+% Invalid input detected at '^' marker.
+	
+S3(config-if)#switchport port-security mac-address sti
+S3(config-if)#switchport port-security mac-address sticky 
+S3(config-if)#interface fa0/11
+S3(config-if)#switchport port-security 
+Command rejected: FastEthernet0/11 is a dynamic port.
+S3(config-if)#switchport port-security maximum 2
+S3(config-if)#switchport port-security mac-address sticky 
+S3(config-if)#interface fa0/18
+S3(config-if)#switchport port-security 
+Command rejected: FastEthernet0/18 is a dynamic port.
+S3(config-if)#switchport port-security maximum 2
+S3(config-if)#switchport port-security mac-address sticky 
+S3(config-if)#end
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3#ena
+S3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S3(config)#vtp mode client
+Setting device to VTP CLIENT mode.
+S3(config)#vtp domain acc
+S3(config)#vtp domain access
+Domain name already set to access.
+S3(config)#vtp pass
+S3(config)#vtp password lab4
+Password already set to lab4
+S3(config)#end
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3#ena
+S3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S3(config)#interface vlan 199
+S3(config-if)#
+%LINK-5-CHANGED: Interface Vlan199, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan199, changed state to up
+
+S3(config-if)#ip add
+S3(config-if)#ip address 172.17.199.13 255.255.255.0
+S3(config-if)#no sh
+S3(config-if)#no shutdown 
+S3(config-if)#
+S3(config-if)#
+S3(config-if)#exit
+S3(config)#interface range fa0/6-fa0/10
+S3(config-if-range)#switch
+S3(config-if-range)#switchport acc
+S3(config-if-range)#switchport access vlan 30
+S3(config-if-range)#interfa
+S3(config-if-range)#interface range fa0/11-fa0/17
+S3(config-if-range)#swi
+S3(config-if-range)#switchport acc
+S3(config-if-range)#switchport access vlan 10
+S3(config-if-range)#interface range fa0/18-fa0/24
+S3(config-if-range)#swu
+S3(config-if-range)#swi
+S3(config-if-range)#switchport acc
+S3(config-if-range)#switchport access vlan 20
+S3(config-if-range)#end
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3#
+S3#copy ru
+S3#copy running-config star
+S3#copy running-config startup-config 
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+S3#
